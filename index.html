@@ -1,0 +1,29 @@
+<!DOCTYPE html><html xml:lang="pl" dir="ltr" lang="pl"  >
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="js/mechanics.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body ng-app="nbpCurrApp">
+<div ng-controller="currDispCtrl" class="panel" >
+	<h4>NBP currencies simple query</h4>
+	<p id="info">Date range, maximum 3 months long:</p>
+	<form  ng-submit="getData()" class="form-group"><input class="form-control" ng-model="fromDate" type="text" placeholder="yyyy-MM-dd"></form>		
+	<form ng-submit="getData()"   class="form-group"><input class="form-control" ng-model="toDate" type="text" placeholder="yyyy-MM-dd"></form>
+
+	<form  class="form-group">
+      <input class="form-control" ng-model="query" type="text" placeholder="Filter by" autofocus>
+    </form>
+	 
+	<div ng-repeat="day in nbpJson">
+		<p>Ratings for: {{day.effectiveDate}}</p>
+		<ul class="list-inline">
+			<li class="list-group-item" ng-repeat="item2 in day.rates | filter:query | orderBy: 'code'"><strong>{{item2.code}}</strong>: {{item2.mid}} zł</li>
+		</ul>
+	</div>
+</div>
+
+</body>
+</html>
