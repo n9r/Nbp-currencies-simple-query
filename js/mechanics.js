@@ -28,7 +28,7 @@ nbpCurrApp.controller("currDispCtrl", function ($scope, $http, $filter){
 					$scope.nbpJson = response.data;
 					angular.element(document.querySelector('#info')).removeClass('bg-danger bg-info');
 					}, 
-				function (error) {	
+				function (error) {
 					angular.element(document.querySelector('#info')).addClass('bg-danger');
 				});
 
