@@ -19,12 +19,37 @@
 	<form  class="form-group">
 		<input class="form-control" ng-model="query" type="text" placeholder="Filter by" autofocus>
 	</form>
-	<div ng-repeat="day in nbpJson">
-		<p class="bg-info">Ratings for: {{day.effectiveDate}}</p>
-		<ul class="row">
-			<li class="col-md-2 table-bordered" ng-repeat="item2 in day.rates | filter:query | orderBy: 'code'"><strong>{{item2.code}}</strong><br><sup>{{item2.currency}}:</sup><br><span class="bg-warning">{{item2.mid}} zł</span></li>
-		</ul>
+	<button class="btn-primary" ng-click="getData()">
+		send query
+	</button>
+
+	<div class="well well-sm" ng-repeat="dayItem in nbpJson">
+
+		<p class="panel-info" >Ratings for: <strong>{{dayItem.effectiveDate}}</strong></p>
+
+		<table class="table table-striped table-condensed">
+			<thead>
+				<tr>
+					<th>
+						Currency
+					</th>
+					<th>
+						Value
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item2 in dayItem.rates | filter:query | orderBy: 'code'">
+
+					<td>
+						<strong>{{item2.code}}</strong> / {{item2.currency}}
+					</td>
+					<td>{{item2.mid}} zł.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
 	</div>
-</div>
 </body>
 </html>
